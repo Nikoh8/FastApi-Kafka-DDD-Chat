@@ -1,0 +1,5 @@
+.venv
+Dockerfile
+docker_compose
+README.md
+Makefile
