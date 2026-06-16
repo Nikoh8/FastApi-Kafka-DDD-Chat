@@ -17,6 +17,10 @@ app-down:
 app-shell:
 	$(EXEC) $(APP_CONTAINER) bash
 
+.PHONY: test
+test:
+	$(EXEC) $(APP_CONTAINER) pytest
+
 .PHONY: app-logs
 app-logs:
 	$(LOGS) $(APP_CONTAINER) -f
