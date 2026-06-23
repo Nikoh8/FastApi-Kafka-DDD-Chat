@@ -3,7 +3,12 @@ EXEC = docker exec -it
 LOGS = docker logs
 ENV = --env-file .env
 APP_FILE = docker_compose/app.yaml
+STORAGES_FILE = docker_compose/storages.yaml
 APP_CONTAINER = main-app
+
+.PHONY: all
+all:
+	$(DC) -f $(APP_FILE) -f $(STORAGES_FILE) $(ENV) up --build -d
 
 .PHONY: app
 app:
@@ -24,3 +29,11 @@ test:
 .PHONY: app-logs
 app-logs:
 	$(LOGS) $(APP_CONTAINER) -f
+
+.PHONY: storages
+storages:
+	$(DC) -f $(STORAGES_FILE) $(ENV) up --build -d
+
+.PHONY: storages-down
+storages-down:
+	$(DC) -f $(STORAGES_FILE) down
